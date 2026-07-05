@@ -1,0 +1,15 @@
+name: Keep Streamlit App Awake
+
+on:
+  schedule:
+    # Jalan tiap 6 jam (aman, karena batas sleep-nya 12 jam)
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # biar bisa dijalankan manual juga dari tab Actions
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Streamlit app
+        run: |
+          curl -sS -o /dev/null -w "%{http_code}\n" https://GANTI-DENGAN-URL-APPMU.streamlit.app
